@@ -83,4 +83,17 @@ obj.deleteBooksHandler = function (req, res) {
   });
 };
 
+obj.updateBooksHandler = function (req,res) {
+  const bookId = req.params.id;
+  const { title, description, status, email, imageURL } = req.body;
+  console.log(bookId);
+  bookModel.findByIdAndUpdate(bookId,{title, description, status, email, imageURL},(err, result)=>{
+    bookModel.find({ email: email }, (err, result) => {
+      if (err) console.log("error");
+      else res.send(result);
+    });
+  })
+
+}
+
 module.exports = obj;
