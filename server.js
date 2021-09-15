@@ -4,6 +4,7 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const schema = require("./booksSchema");
+const { PromiseProvider } = require("mongoose");
 
 const app = express();
 app.use(cors());
@@ -22,6 +23,8 @@ app.get("/books", schema.booksHanler);
 app.post("/books", schema.addBooksHandler);
 
 app.delete("/books/:id", schema.deleteBooksHandler);
+
+app.put('/books/:id',schema.updateBooksHandler)
 
 app.get("/test", (request, response) => {
   response.send("test request received");
